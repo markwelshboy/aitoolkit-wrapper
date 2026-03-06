@@ -61,13 +61,13 @@ install_shell_files() {
     install -m 0644 "$POD_RUNTIME_DIR/.git-qol.sh" /root/.git-qol.sh
 
   [[ -f "$POD_RUNTIME_DIR/ai-toolkit/monitor.sh" ]] && \
-    install -m 0755 "$POD_RUNTIME_DIR/ai-toolkit/monitor.sh" /usr/local/bin/aitk-monitor
+    install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/monitor.sh" /usr/local/bin/aitk-monitor
 
   [[ -f "$POD_RUNTIME_DIR/ai-toolkit/run_with_monitor.sh" ]] && \
-    install -m 0755 "$POD_RUNTIME_DIR/ai-toolkit/run_with_monitor.sh" /usr/local/bin/aitk-run-with-monitor
+    install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/run_with_monitor.sh" /usr/local/bin/aitk-run-with-monitor
 
   [[ -f "$POD_RUNTIME_DIR/ai-toolkit/patch_buckets.sh" ]] && \
-    install -m 0755 "$POD_RUNTIME_DIR/ai-toolkit/patch_buckets.sh" /usr/local/bin/aitk-patch-buckets
+    install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/patch_buckets.sh" /usr/local/bin/aitk-patch-buckets
 
 }
 
@@ -102,7 +102,7 @@ main() {
   # Tweak buckets.py to add 720x1280
   local buckets_file="/app/ai-toolkit/toolkit/buckets.py"
   if [[ -f "$buckets_file" ]]; then
-    log "Patching buckets.py to add 720x1280 if missing (required for WAN 2.2 portrait mode)"
+    log "Patching buckets.py to add 720x1280 (and 1280x720) if missing"
     aitk-patch-buckets 720x1280 -f "$buckets_file" || log "Failed to patch buckets.py; maybe it was already patched? Continuing anyway..."
   else
     log "WARNING: buckets.py not found at expected location: $buckets_file; skipping bucket patch"
