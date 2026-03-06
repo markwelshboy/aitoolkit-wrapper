@@ -48,25 +48,33 @@ install_shell_files() {
   rm -f "$tmp"
 
   # Optional helper files
+  log "installing helper scripts from pod-runtime (if present)"
+  log "Installing .bash_functions..."
   [[ -f "$POD_RUNTIME_DIR/.bash_functions" ]] && \
     install -m 0644 "$POD_RUNTIME_DIR/.bash_functions" /root/.bash_functions
 
+  log "Installing .bash_aliases..."
   [[ -f "$POD_RUNTIME_DIR/.bash_aliases" ]] && \
     install -m 0644 "$POD_RUNTIME_DIR/.bash_aliases" /root/.bash_aliases
 
+  log "Installing .bash_prompt..."
   [[ -f "$POD_RUNTIME_DIR/.bash_prompt" ]] && \
     install -m 0644 "$POD_RUNTIME_DIR/.bash_prompt" /root/.bash_prompt
 
+    log "Installing .git-qol.sh..."
   [[ -f "$POD_RUNTIME_DIR/.git-qol.sh" ]] && \
     install -m 0644 "$POD_RUNTIME_DIR/.git-qol.sh" /root/.git-qol.sh
 
-  [[ -f "$POD_RUNTIME_DIR/ai-toolkit/monitor.sh" ]] && \
+  log "Installing aitoolkit/monitor.sh... to /usr/local/bin/aitk-monitor"
+  [[ -f "$POD_RUNTIME_DIR/aitoolkit/monitor.sh" ]] && \
     install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/monitor.sh" /usr/local/bin/aitk-monitor
 
-  [[ -f "$POD_RUNTIME_DIR/ai-toolkit/run_with_monitor.sh" ]] && \
+  log "Installing aitoolkit/run_with_monitor.sh... to /usr/local/bin/aitk-run-with-monitor"
+  [[ -f "$POD_RUNTIME_DIR/aitoolkit/run_with_monitor.sh" ]] && \
     install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/run_with_monitor.sh" /usr/local/bin/aitk-run-with-monitor
 
-  [[ -f "$POD_RUNTIME_DIR/ai-toolkit/patch_buckets.sh" ]] && \
+  log "Installing aitoolkit/patch_buckets.sh... to /usr/local/bin/aitk-patch-buckets"
+  [[ -f "$POD_RUNTIME_DIR/aitoolkit/patch_buckets.sh" ]] && \
     install -m 0755 "$POD_RUNTIME_DIR/aitoolkit/patch_buckets.sh" /usr/local/bin/aitk-patch-buckets
 
 }
