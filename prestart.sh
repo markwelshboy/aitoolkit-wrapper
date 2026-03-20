@@ -107,6 +107,8 @@ main() {
   install_shell_files
   persist_env_for_ssh
 
+  hff ensure || log "WARNING: hff ensure failed; if you see issues with Hugging Face Hub access, this may be why"
+
   # Tweak buckets.py to add 720x1280
   local buckets_file="/app/ai-toolkit/toolkit/buckets.py"
   if [[ -f "$buckets_file" ]]; then
